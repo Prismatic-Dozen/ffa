@@ -9,47 +9,46 @@ let _state = {
 // Fallback assets if Module 2 assets are not present in localStorage
 const M3_FALLBACK_ASSETS = [
   { id:'a1', name:'Rajasthan Solar Plant', type:'Plant', parent:null, sap:'PLANT-001', make:'', rating:'150 MWp', location:'Rajasthan', naming:'RSP' },
-  { id:'a2', name:'ICR Block A', type:'Inverter', parent:'a1', sap:'EQ-1001', make:'SMA', rating:'2.5 MW', location:'Block A', naming:'ICR-A' },
-  { id:'a3', name:'ICR Block B', type:'Inverter', parent:'a1', sap:'EQ-1002', make:'ABB', rating:'2.5 MW', location:'Block B', naming:'ICR-B' },
-  { id:'a4', name:'Main Transformer T1', type:'Transformer', parent:'a1', sap:'EQ-2001', make:'Siemens', rating:'220 KV', location:'Switchyard', naming:'TX-1' },
+  { id:'a2', name:'ICR Block 1', type:'Inverter Block', parent:'a1', sap:'EQ-1001', make:'ABB', rating:'2.5 MW', location:'Block 1', naming:'ICR-1' },
+  { id:'a3', name:'ICR Block 2', type:'Inverter Block', parent:'a1', sap:'EQ-1002', make:'ABB', rating:'2.5 MW', location:'Block 2', naming:'ICR-2' },
+  { id:'a4', name:'Main Transformer TR-1', type:'Transformer', parent:'a1', sap:'EQ-2001', make:'Siemens', rating:'120 MVA', location:'Switchyard', naming:'TR-1' },
   { id:'a5', name:'Switchyard', type:'Switchyard', parent:'a1', sap:'EQ-3001', make:'GE', rating:'220 KV', location:'North', naming:'SY-01' },
-  { id:'a6', name:'INV-A1', type:'Inverter', parent:'a2', sap:'EQ-1001-01', make:'SMA', rating:'2.5 MW', location:'ICR-A Row 1', naming:'ICR-A/INV-A1' }
+  { id:'a6', name:'ICR1-INV-1', type:'Inverter', parent:'a2', sap:'EQ-1001-01', make:'ABB', rating:'2.5 MW', location:'ICR-1 Row 1', naming:'ICR1-INV-1' },
+  { id:'a7', name:'ICR1-INV-2', type:'Inverter', parent:'a2', sap:'EQ-1001-02', make:'ABB', rating:'2.5 MW', location:'ICR-1 Row 1', naming:'ICR1-INV-2' }
 ];
 
 const SEED_LOGS = [
   {
     id: 'L001',
-    date: '2026-06-23',
+    date: '2026-06-20',
     shift: 'Day',
     weather: 'Clear Sky, Avg Temp 42°C, Wind speed 12 km/h',
-    gridStatus: 'Normal, Grid availability 99.8%',
+    gridStatus: 'Normal, Grid availability 100%',
     activities: [
-      { type: 'Generation', desc: 'Plant generation peak reached 142 MW at 13:00 hrs. Cumulative DC generation at 820 MWh.' },
-      { type: 'Maintenance', desc: 'Scheduled quarterly PM completed on SCB Block A (SCB-A1 to SCB-A4).' },
-      { type: 'Safety', desc: 'Toolbox talk conducted on electrical isolation protocols for O&M technicians.' }
+      { type: 'Generation', desc: 'Plant generation peak reached 142 MW at 13:00 hrs. Cumulative daily generation at 820 MWh.' },
+      { type: 'Maintenance', desc: 'Conducted daily plant rounds and checklists.' }
     ],
     anomalies: [
-      { equipId: 'a6', description: 'Inverter INV-A1 temperature alarm tripped. High cooling fan dust observed.', severity: 'High' }
+      { equipId: 'a6', description: 'ICR1-INV-1 Busbar joint overheating and discoloration observed during morning routine checklist.', severity: 'Critical' }
     ],
     followups: [
-      { id: 'F001', desc: 'Clean cooling fan filters on Inverter INV-A1 and verify alarm reset.', assignedTo: 'Vikram R.', dueDate: '2026-06-24', status: 'Closed', closureNotes: 'Cleaned filters and reset alarm. Temperature returned to normal.' }
+      { id: 'F001', desc: 'Tighten bolt contacts and reapply thermal conducting compound on Inverter ICR1-INV-1.', assignedTo: 'Rajesh Sharma', dueDate: '2026-06-21', status: 'Closed', closureNotes: 'Completed maintenance on joint. Verified temperature returned to normal under load.' }
     ]
   },
   {
     id: 'L002',
     date: '2026-06-24',
     shift: 'Day',
-    weather: 'Sunny with partial clouds, Wind speed 15 km/h',
+    weather: 'Sunny, Avg Temp 44°C, Wind speed 15 km/h',
     gridStatus: 'DISCOM generation curtailment instruction received between 11:30 and 13:00 (loss of ~150 kW)',
     activities: [
-      { type: 'Generation', desc: 'Plant generation peak reached 120 MW. Cumulative generation impacted by DISCOM curtailment.' },
-      { type: 'Maintenance', desc: 'Minor cleaning and bushing inspections conducted on Main Transformer T1.' }
+      { type: 'Generation', desc: 'Plant generation peak reached 120 MW. Cumulative generation impacted by DISCOM curtailment.' }
     ],
     anomalies: [
-      { equipId: 'a4', description: 'Transformer T1 oil seepage observed near low-voltage bushing terminal.', severity: 'Critical' }
+      { equipId: 'a6', description: 'ICR1-INV-1 cabin ambient temperature alarm (48°C) tripped during afternoon round (above threshold of 45°C).', severity: 'High' }
     ],
     followups: [
-      { id: 'F002', desc: 'Bushing replacement and gasket tightening for T1 low-voltage terminal.', assignedTo: 'Sanjay Mehta', dueDate: '2026-06-26', status: 'Open', closureNotes: '' }
+      { id: 'F002', desc: 'Inspect ventilation fans and clean air filters on Inverter ICR1-INV-1.', assignedTo: 'Amit Patel', dueDate: '2026-06-25', status: 'Open', closureNotes: '' }
     ]
   },
   {
@@ -57,16 +56,15 @@ const SEED_LOGS = [
     date: '2026-06-25',
     shift: 'Night',
     weather: 'Cool, Avg Temp 29°C',
-    gridStatus: 'Normal, Grid availability 100%',
+    gridStatus: 'Normal',
     activities: [
-      { type: 'Safety', desc: 'Night shift security patrol completed. Perimeter fence check normal.' },
-      { type: 'Grid Status', desc: 'Night time reactive power support active. SCADA telemetry verified with SLDC.' }
+      { type: 'Safety', desc: 'Night shift security patrol completed. Perimeter fence check normal.' }
     ],
     anomalies: [
-      { equipId: 'a5', description: 'Switchyard control room SCADA communication interface card dropped twice during shift.', severity: 'Medium' }
+      { equipId: 'a4', description: 'Main Transformer TR-1 low-voltage bushing oil seepage observed.', severity: 'Critical' }
     ],
     followups: [
-      { id: 'F003', desc: 'Inspect SCADA comm fiber patch cable and check connection terminals.', assignedTo: 'Rajesh Sharma', dueDate: '2026-06-27', status: 'Open', closureNotes: '' }
+      { id: 'F003', desc: 'Tighten gasket bolts on TR-1 and monitor oil level.', assignedTo: 'Rajesh Sharma', dueDate: '2026-06-26', status: 'Open', closureNotes: '' }
     ]
   }
 ];

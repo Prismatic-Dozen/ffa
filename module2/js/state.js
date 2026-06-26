@@ -10,11 +10,12 @@ let _state = {
 
 const SEED_ASSETS = [
   { id:'a1', name:'Rajasthan Solar Plant', type:'Plant', parent:null, sap:'PLANT-001', make:'', rating:'150 MWp', location:'Rajasthan', naming:'RSP' },
-  { id:'a2', name:'ICR Block A', type:'Inverter', parent:'a1', sap:'EQ-1001', make:'SMA', rating:'2.5 MW', location:'Block A', naming:'ICR-A' },
-  { id:'a3', name:'ICR Block B', type:'Inverter', parent:'a1', sap:'EQ-1002', make:'ABB', rating:'2.5 MW', location:'Block B', naming:'ICR-B' },
-  { id:'a4', name:'Main Transformer T1', type:'Transformer', parent:'a1', sap:'EQ-2001', make:'Siemens', rating:'220 KV', location:'Switchyard', naming:'TX-1' },
+  { id:'a2', name:'ICR Block 1', type:'Inverter Block', parent:'a1', sap:'EQ-1001', make:'ABB', rating:'2.5 MW', location:'Block 1', naming:'ICR-1' },
+  { id:'a3', name:'ICR Block 2', type:'Inverter Block', parent:'a1', sap:'EQ-1002', make:'ABB', rating:'2.5 MW', location:'Block 2', naming:'ICR-2' },
+  { id:'a4', name:'Main Transformer TR-1', type:'Transformer', parent:'a1', sap:'EQ-2001', make:'Siemens', rating:'120 MVA', location:'Switchyard', naming:'TR-1' },
   { id:'a5', name:'Switchyard', type:'Switchyard', parent:'a1', sap:'EQ-3001', make:'GE', rating:'220 KV', location:'North', naming:'SY-01' },
-  { id:'a6', name:'INV-A1', type:'Inverter', parent:'a2', sap:'EQ-1001-01', make:'SMA', rating:'2.5 MW', location:'ICR-A Row 1', naming:'ICR-A/INV-A1' }
+  { id:'a6', name:'ICR1-INV-1', type:'Inverter', parent:'a2', sap:'EQ-1001-01', make:'ABB', rating:'2.5 MW', location:'ICR-1 Row 1', naming:'ICR1-INV-1' },
+  { id:'a7', name:'ICR1-INV-2', type:'Inverter', parent:'a2', sap:'EQ-1001-02', make:'ABB', rating:'2.5 MW', location:'ICR-1 Row 1', naming:'ICR1-INV-2' }
 ];
 
 const SEED_FAULTS = [
@@ -29,15 +30,14 @@ const SEED_FAULTS = [
 ];
 
 const SEED_SITES = [
-  { id:'s1', name:'Rajasthan Solar Plant', zone:'North', dc:150, ac:130, state:'Rajasthan', shName:'Rajesh Sharma', shEmail:'rajesh@solar.com', equips:['ICR-A','ICR-B','TX-1','SY-01'] },
-  { id:'s2', name:'Gujarat Wind Farm', zone:'West', dc:50, ac:50, state:'Gujarat', shName:'Sanjay Mehta', shEmail:'sanjay@wind.com', equips:['WTG-A1','WTG-B2','MV-01'] }
+  { id:'s1', name:'Rajasthan Solar Plant', zone:'West', dc:150, ac:130, state:'Rajasthan', shName:'Rajesh Sharma', shEmail:'rajesh.sharma@cleanenergy.com', equips:['ICR1-INV-1','ICR1-INV-2','TR-1'] },
+  { id:'s2', name:'Gujarat Wind Farm', zone:'West', dc:50, ac:50, state:'Gujarat', shName:'Sanjay Mehta', shEmail:'sanjay.mehta@cleanenergy.com', equips:['WTG-A1','Switchyard-Breaker-1'] }
 ];
 
 const SEED_DEFECTS = [
-  { id:'D001', siteId:'s1', equipId:'a6', faultId:'f1', obs:'Severe hot spot on terminal L2, discoloration visible', cat:'Critical', status:'Open', assignedTo:'Rajesh Sharma', raisedOn:'2026-06-23', raisedBy:'Amit Patel', closedOn:'', actionTaken:'' },
-  { id:'D002', siteId:'s1', equipId:'a2', faultId:'f2', obs:'Temperature reading 48°C, above threshold', cat:'High', status:'In Progress', assignedTo:'Vikram R.', raisedOn:'2026-06-24', raisedBy:'Suresh G.', closedOn:'', actionTaken:'Cooling system being inspected', reading:'48' },
-  { id:'D003', siteId:'s2', equipId:'a4', faultId:'f4', obs:'Minor oil seepage around main transformer bushing', cat:'Critical', status:'Closed', assignedTo:'Sanjay Mehta', raisedOn:'2026-06-20', raisedBy:'Field Team', closedOn:'2026-06-21', actionTaken:'Bushing replaced, leak sealed' },
-  { id:'D004', siteId:'s1', equipId:'a5', faultId:'f5', obs:'Breaker SY-01/CB3 tripped during normal operation', cat:'High', status:'Open', assignedTo:'Rajesh Sharma', raisedOn:'2026-06-25', raisedBy:'SCADA System', closedOn:'', actionTaken:'' }
+  { id:'D001', siteId:'s1', equipId:'a6', faultId:'f1', obs:'Severe hot spot found on terminal L2', cat:'Critical', status:'Closed', assignedTo:'Rajesh Sharma', raisedOn:'2026-06-20', raisedBy:'Ravi Kumar', closedOn:'2026-06-21', actionTaken:'Tightened bolt contacts and reapplied thermal conducting compound. Re-scanned and confirmed normal.' },
+  { id:'D002', siteId:'s1', equipId:'a6', faultId:'f2', obs:'Reading of 48 °C is above threshold (45)', cat:'High', status:'Open', assignedTo:'Amit Patel', raisedOn:'2026-06-24', raisedBy:'Amit Patel', closedOn:'', actionTaken:'', reading:'48' },
+  { id:'D003', siteId:'s1', equipId:'a4', faultId:'f4', obs:'Main Transformer TR-1 low-voltage bushing oil seepage observed.', cat:'Critical', status:'Open', assignedTo:'Rajesh Sharma', raisedOn:'2026-06-25', raisedBy:'Ravi Kumar', closedOn:'', actionTaken:'' }
 ];
 
 const SEED_PERMS = [

@@ -111,8 +111,8 @@ const BASELINE_SITES = [
   {
     id: 'site_1',
     name: 'Rajasthan Solar Plant',
-    acCapacity: 100,
-    dcCapacity: 120,
+    acCapacity: 130,
+    dcCapacity: 150,
     state: 'Rajasthan',
     village: 'Bhadla',
     zone: 'West',
