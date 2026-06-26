@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <script>
+    if (window.location.pathname.endsWith('/module2')) {
+      window.location.pathname += '/';
+    }
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 2 — Defect Management &amp; Ticketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand-sec">
+        <a class="brand-back" href="../index.html"><i class="hgi-stroke hgi-arrow-left-01" style="font-size: 14px; vertical-align: middle;"></i> Module Hub</a>
+        <div class="brand-logo"><i class="hgi-stroke hgi-wrench"></i></div>
+      <div class="brand-title">Defect Management</div>
+      <div class="brand-sub">Module 02 &mdash; Ticketing System</div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item active" data-page="overview-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        Dashboard
+      </div>
+
+      <div class="nav-group-label">Library</div>
+      <div class="nav-item" data-page="asset-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+        </svg>
+        Asset Hierarchy
+      </div>
+      <div class="nav-item" data-page="faults-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="12 2 2 22 22 22" />
+          <line x1="12" y1="9" x2="12" y2="13" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+        Fault Library
+      </div>
+
+      <div class="nav-group-label">Site Management</div>
+      <div class="nav-item" data-page="sites-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+          <circle cx="12" cy="10" r="3" />
+        </svg>
+        Sites
+      </div>
+      <div class="nav-item" data-page="adoption-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+        </svg>
+        Adoption &amp; Mapping
+      </div>
+
+      <div class="nav-group-label">Operations</div>
+      <div class="nav-item" data-page="record-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+        </svg>
+        Record Defect
+        <span class="nav-badge" id="open-badge">2</span>
+      </div>
+
+      <div class="nav-group-label">Reporting</div>
+      <div class="nav-item" data-page="reports-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="20" x2="18" y2="10" />
+          <line x1="12" y1="20" x2="12" y2="4" />
+          <line x1="6" y1="20" x2="6" y2="14" />
+        </svg>
+        Analytics &amp; Reports
+      </div>
+
+      <div class="nav-group-label">Admin</div>
+      <div class="nav-item" data-page="admin-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9z" />
+        </svg>
+        Access Control
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="role-chip"><i class="hgi-stroke hgi-user" style="font-size: 13px; vertical-align: middle;"></i> Admin</span>
+      <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme"></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <header class="topbar">
+      <h2 class="topbar-title" id="page-title">Defect Dashboard</h2>
+      <div class="topbar-right">
+        <div class="sync-indicator"><span class="sync-dot"></span>AWS Synced</div>
+        <button class="btn btn-primary" onclick="showModal('record-defect-modal')">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="12" y1="5" x2="12" y2="19" />
+            <line x1="5" y1="12" x2="19" y2="12" />
+          </svg>
+          New Defect
+        </button>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ===== OVERVIEW PAGE ===== -->
+      <div id="overview-page" class="page active">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-ico"><i class="hgi-stroke hgi-alert-01"></i></div>
+            <div class="stat-val" id="stat-total">0</div>
+            <div class="stat-lbl">Total Defects</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico"><i class="hgi-stroke hgi-circle" style="color:#f87171;"></i></div>
+            <div class="stat-val" id="stat-open" style="color:#f87171;">0</div>
+            <div class="stat-lbl">Open / Pending</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico"><i class="hgi-stroke hgi-checkmark-circle-02" style="color:#86efac;"></i></div>
+            <div class="stat-val" id="stat-closed" style="color:#86efac;">0</div>
+            <div class="stat-lbl">Closed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico"><i class="hgi-stroke hgi-clock-01"></i></div>
+            <div class="stat-val" id="stat-critical" style="color:#fca5a5;">0</div>
+            <div class="stat-lbl">Critical Active</div>
+          </div>
+        </div>
+
+        <div class="dash-grid" style="margin-bottom:20px;">
+          <!-- Recent defects -->
+          <div class="glass glass-p">
+            <h3 class="sec-title">Recent Defects</h3>
+            <p class="sec-sub">Latest reported equipment defects</p>
+            <div class="tbl-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Equipment</th>
+                    <th>Defect</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-defects-body"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Category Breakdown Chart -->
+          <div class="glass glass-p">
+            <h3 class="sec-title">Defects by Category</h3>
+            <p class="sec-sub">Current open defect breakdown</p>
+            <div class="chart-container" id="overview-chart"></div>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
+              <span style="font-size:11px;color:#fca5a5;">&#9632; Critical</span>
+              <span style="font-size:11px;color:#fde68a;">&#9632; High</span>
+              <span style="font-size:11px;color:#c4b5fd;">&#9632; Medium</span>
+              <span style="font-size:11px;color:#94a3b8;">&#9632; Low</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- MTTR/MTBF Summary -->
+        <div class="dash-grid-3">
+          <div class="glass glass-p" style="text-align:center;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:700;">MTTR (Mean Time to Repair)
+            </div>
+            <div style="font-size:32px;font-weight:900;color:var(--accent);">4.2 <span
+                style="font-size:14px;font-weight:400;color:var(--muted);">hrs</span></div>
+          </div>
+          <div class="glass glass-p" style="text-align:center;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:700;">MTBF (Mean Time Between
+              Failures)</div>
+            <div style="font-size:32px;font-weight:900;color:var(--success);">312 <span
+                style="font-size:14px;font-weight:400;color:var(--muted);">hrs</span></div>
+          </div>
+          <div class="glass glass-p" style="text-align:center;">
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:700;">SLA Compliance Rate</div>
+            <div style="font-size:32px;font-weight:900;color:var(--info);">87 <span
+                style="font-size:14px;font-weight:400;color:var(--muted);">%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ASSET HIERARCHY PAGE ===== -->
+      <div id="asset-page" class="page">
+        <div class="controls">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" class="search-inp" id="asset-search" placeholder="Search assets...">
+          </div>
+          <button class="btn btn-primary" onclick="showModal('asset-modal')">+ Add Asset</button>
+        </div>
+        <div class="dash-grid">
+          <div class="glass glass-p">
+            <h3 class="sec-title">Asset Tree</h3>
+            <p class="sec-sub">SAP-linked equipment hierarchy</p>
+            <div class="asset-tree" id="asset-tree"></div>
+          </div>
+          <div class="glass glass-p">
+            <h3 class="sec-title">Asset Details</h3>
+            <p class="sec-sub" id="asset-detail-sub">Select an asset to view details</p>
+            <div id="asset-detail-panel" style="color:var(--muted);font-size:13px;text-align:center;padding:40px 0;">
+              <i class="hgi-stroke hgi-file-01"></i> Click an asset in the tree to view its details
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FAULT LIBRARY PAGE ===== -->
+      <div id="faults-page" class="page">
+        <div class="controls">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" class="search-inp" id="fault-search" placeholder="Search faults..."
+              oninput="renderFaultLibrary()">
+          </div>
+          <select class="filter-sel" id="fault-cat-filter" onchange="renderFaultLibrary()">
+            <option value="all">All Categories</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <button class="btn btn-primary" onclick="showModal('fault-modal')">+ Add Fault Type</button>
+        </div>
+        <div class="glass">
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fault Description</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th>Photo Req.</th>
+                  <th>Reading Req.</th>
+                  <th>Resolve Time</th>
+                  <th>Escalation</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="fault-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== SITES PAGE ===== -->
+      <div id="sites-page" class="page">
+        <div class="controls">
+          <div class="search-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8" />
+              <line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input type="text" class="search-inp" placeholder="Search sites...">
+          </div>
+          <button class="btn btn-primary" onclick="showModal('site-modal-m2')">+ Add Site</button>
+        </div>
+        <div id="sites-cards-grid"
+          style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;"></div>
+      </div>
+
+      <!-- ===== ADOPTION PAGE ===== -->
+      <div id="adoption-page" class="page">
+        <div class="sec-title" style="margin-bottom:6px;">Site Adoption &amp; Fault Mapping</div>
+        <p class="sec-sub">Map fault types to site equipment and assign responsible users</p>
+        <div class="glass glass-p">
+          <div class="form-row" style="margin-bottom:18px;">
+            <div class="form-group">
+              <label class="form-label">Select Site</label>
+              <select class="form-sel" id="adopt-site-sel" onchange="renderAdoptionEquipment()"></select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Select Equipment</label>
+              <select class="form-sel" id="adopt-equip-sel" onchange="renderAdoptionFaults()"></select>
+            </div>
+          </div>
+          <div id="adoption-fault-map"></div>
+        </div>
+      </div>
+
+      <!-- ===== RECORD DEFECT PAGE ===== -->
+      <div id="record-page" class="page">
+        <div class="tab-row">
+          <div class="tab-btn active" data-tab="rec-new">Record New Defect</div>
+          <div class="tab-btn" data-tab="rec-list">All Defect Records</div>
+        </div>
+
+        <div id="rec-new" class="tab-pane active">
+          <div class="simulator-layout">
+            <!-- Left Column: Information / Instructions -->
+            <div class="glass glass-p">
+              <h3 class="sec-title">Field Force Defect Logging</h3>
+              <p class="sec-sub">Mobile application simulation for field technicians</p>
+              <p style="font-size:12px; color:var(--text2); margin-top:6px; margin-bottom:20px; line-height:1.5;">
+                This simulator demonstrates the mobile-first defect logging flow used by technicians in the field. Issues recorded here are mapped to the SAP asset hierarchy and sync instantly with the central database.
+              </p>
+              
+              <div style="margin-top:24px; padding:12px; background:rgba(239, 68, 68, 0.05); border:1px dashed rgba(239, 68, 68, 0.2); border-radius:10px;">
+                <h4 style="font-size:12px; font-weight:700; color:var(--primary-l); margin-bottom:6px;">Mobile Features Enforced:</h4>
+                <ul style="font-size:11px; color:var(--text2); padding-left:16px; line-height:1.6;">
+                  <li>Dynamic field validation based on Fault Library</li>
+                  <li>Mandatory photos for critical/high severity reports</li>
+                  <li>Real-time sync to central operations dashboard</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Right Column: Phone Emulator -->
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <div class="ffa-title" style="text-align: center; margin-bottom: 12px; font-weight: 700; font-size: 16px; color: var(--primary-l); font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">FFA (Field Force Application)</div>
+              
+              <div class="phone-emulator">
+                <div class="phone-home-indicator"></div>
+                <div class="phone-screen">
+                  <div class="phone-status-bar">
+                    <span>09:41 AM</span>
+                    <span style="color:var(--success);">Online / Connected</span>
+                    <div class="phone-status-right">
+                      <svg viewBox="0 0 24 24" style="width:12px; height:12px; fill:currentColor; stroke:none;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+                      <span>100%</span>
+                    </div>
+                  </div>
+
+                  <div style="margin-bottom:14px; border-bottom:1px solid var(--border); padding-bottom:8px;">
+                    <div class="phone-title">Record Defect</div>
+                    <div class="phone-subtitle">Fill in all required fields to log the issue.</div>
+                  </div>
+
+                  <form onsubmit="submitDefectForm(event)" style="display:flex; flex-direction:column; gap:12px; flex-grow:1;">
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label class="form-label" style="font-size:11px;">Site *</label>
+                      <select class="form-sel" id="df-site" onchange="updateDfEquipment()" required style="padding: 7px 10px; font-size:12px;"></select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label class="form-label" style="font-size:11px;">Parent Equipment *</label>
+                      <select class="form-sel" id="df-parent" onchange="updateDfChild()" required style="padding: 7px 10px; font-size:12px;"></select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label class="form-label" style="font-size:11px;">Child / Sub-Equipment</label>
+                      <select class="form-sel" id="df-child" style="padding: 7px 10px; font-size:12px;"></select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label class="form-label" style="font-size:11px;">Fault Type *</label>
+                      <select class="form-sel" id="df-fault-type" onchange="checkFaultRequirements()" required style="padding: 7px 10px; font-size:12px;"></select>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom:0;">
+                      <label class="form-label" style="font-size:11px;">Defect Observation *</label>
+                      <textarea class="form-textarea" id="df-observation" placeholder="Describe the defect in detail..." required style="padding: 7px 10px; font-size:12px; min-height:60px;"></textarea>
+                    </div>
+
+                    <div class="form-row" style="margin-bottom:0; gap:8px;">
+                      <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label" style="font-size:11px;">Observed Reading <span id="df-reading-unit" style="color:var(--muted);font-size:9px;"></span></label>
+                        <input type="text" class="form-inp" id="df-reading" placeholder="Reading" style="padding: 7px 10px; font-size:12px;">
+                      </div>
+                      <div class="form-group" style="margin-bottom:0;">
+                        <label class="form-label" style="font-size:11px;">Observed Date &amp; Time</label>
+                        <input type="datetime-local" class="form-inp" id="df-datetime" style="padding: 7px 10px; font-size:12px;">
+                      </div>
+                    </div>
+
+                    <div class="form-group" id="df-photo-group" style="margin-bottom:12px;">
+                      <label class="form-label" style="font-size:11px;">Photograph <span id="df-photo-req-label" style="color:var(--primary-l);font-size:9px;"></span></label>
+                      <div class="photo-drop" onclick="document.getElementById('df-photo-inp').click()" style="padding:12px; border-width:1px;">
+                        <div class="photo-drop-ico" style="font-size:20px; margin-bottom:4px;"><i class="hgi-stroke hgi-camera-01"></i></div>
+                        <div class="photo-drop-txt" style="font-size:10px;">Click to capture or upload photo</div>
+                        <input type="file" id="df-photo-inp" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+                      </div>
+                      <div id="df-photo-preview" style="margin-top:6px;"></div>
+                    </div>
+
+                    <div style="display:flex; gap:8px; margin-top:auto; padding-bottom:10px;">
+                      <button type="submit" class="btn btn-primary" style="flex:1; padding: 8px 12px; font-size:11px; justify-content:center;">Submit Defect</button>
+                      <button type="button" class="btn btn-secondary" onclick="clearDefectForm()" style="padding: 8px 12px; font-size:11px; justify-content:center;">Clear</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="rec-list" class="tab-pane">
+          <div class="controls">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+              <input type="text" class="search-inp" id="defect-search" placeholder="Search defects..."
+                oninput="renderDefectList()">
+            </div>
+            <select class="filter-sel" id="defect-status-filter" onchange="renderDefectList()">
+              <option value="all">All Status</option>
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <select class="filter-sel" id="defect-cat-filter" onchange="renderDefectList()">
+              <option value="all">All Categories</option>
+              <option value="Critical">Critical</option>
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="glass">
+            <div class="tbl-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Site / Equipment</th>
+                    <th>Fault Description</th>
+                    <th>Category</th>
+                    <th>Assigned To</th>
+                    <th>Raised On</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="defect-list-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== REPORTS PAGE ===== -->
+      <div id="reports-page" class="page">
+        <div class="sec-title" style="margin-bottom:6px;">Analytics &amp; Reports</div>
+        <p class="sec-sub">Portfolio-level defect analytics, aging, and compliance summaries</p>
+        <div class="dash-grid" style="margin-bottom:20px;">
+          <div class="glass glass-p">
+            <h3 style="font-size:14px;font-weight:700;margin-bottom:14px;">Monthly Defect Trend</h3>
+            <div class="chart-container" id="monthly-chart" style="height:180px;"></div>
+          </div>
+          <div class="glass glass-p">
+            <h3 style="font-size:14px;font-weight:700;margin-bottom:14px;">Defects by Site</h3>
+            <div id="site-breakdown" style="display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+        </div>
+
+        <!-- Aging Report -->
+        <div class="glass glass-p" style="margin-bottom:20px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+            <h3 style="font-size:14px;font-weight:700;">Defect Aging Report</h3>
+            <div style="display:flex;gap:8px;">
+              <button class="btn btn-secondary btn-sm"><i class="hgi-stroke hgi-file-01"></i> Export PDF</button>
+              <button class="btn btn-secondary btn-sm"><i class="hgi-stroke hgi-folder-01"></i> Export CSV</button>
+            </div>
+          </div>
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Defect ID</th>
+                  <th>Equipment</th>
+                  <th>Category</th>
+                  <th>Raised On</th>
+                  <th>Days Open</th>
+                  <th>SLA Status</th>
+                  <th>Assigned To</th>
+                </tr>
+              </thead>
+              <tbody id="aging-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ADMIN PAGE ===== -->
+      <div id="admin-page" class="page">
+        <div class="sec-title" style="margin-bottom:6px;">Access Control Matrix</div>
+        <p class="sec-sub">Configure role permissions and escalation settings</p>
+        <div class="glass glass-p">
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Role</th>
+                  <th>View</th>
+                  <th>Create Defect</th>
+                  <th>Close Defect</th>
+                  <th>Edit Fault Lib.</th>
+                  <th>Manage Assets</th>
+                  <th>Admin Panel</th>
+                </tr>
+              </thead>
+              <tbody id="admin-roles-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content-area -->
+  </div>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Record Defect Quick Modal -->
+  <div class="modal-overlay" id="record-defect-modal">
+    <div class="modal" style="max-width:560px;">
+      <div class="modal-header">
+        <span class="modal-title"><i class="hgi-stroke hgi-wrench"></i> Quick Report Defect</span>
+        <button class="modal-close" onclick="hideModal('record-defect-modal')"><i class="hgi-stroke hgi-cancel-01"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Site</label><select class="form-sel" id="qdf-site"></select>
+          </div>
+          <div class="form-group"><label class="form-label">Equipment</label><select class="form-sel"
+              id="qdf-equip"></select></div>
+        </div>
+        <div class="form-group"><label class="form-label">Fault Type</label><select class="form-sel"
+            id="qdf-fault"></select></div>
+        <div class="form-group"><label class="form-label">Observation</label><textarea class="form-textarea"
+            id="qdf-obs" placeholder="Describe the defect..."></textarea></div>
+        <div class="form-group"><label class="form-label">Priority Override</label><select class="form-sel"
+            id="qdf-priority">
+            <option value="">Auto (from fault type)</option>
+            <option value="Critical">Critical</option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select></div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('record-defect-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="quickSubmitDefect()">Submit Report</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Asset Add Modal -->
+  <div class="modal-overlay" id="asset-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title"><i class="hgi-stroke hgi-factory"></i> Add Asset Node</span>
+        <button class="modal-close" onclick="hideModal('asset-modal')"><i class="hgi-stroke hgi-cancel-01"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Asset Name *</label><input type="text" class="form-inp"
+              id="asset-name" placeholder="e.g. Inverter Block A"></div>
+          <div class="form-group"><label class="form-label">Asset Type *</label><select class="form-sel"
+              id="asset-type">
+              <option>Inverter</option>
+              <option>Transformer</option>
+              <option>SCB</option>
+              <option>Breaker</option>
+              <option>Wind Turbine</option>
+              <option>Switchyard</option>
+              <option>MCR</option>
+              <option>Feeder</option>
+              <option>Battery</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Parent Asset</label><select class="form-sel"
+              id="asset-parent">
+              <option value="">Root Level</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">SAP Asset ID</label><input type="text" class="form-inp"
+              id="asset-sap" placeholder="e.g. EQ-100234"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Make / Manufacturer</label><input type="text"
+              class="form-inp" id="asset-make" placeholder="e.g. ABB, Siemens"></div>
+          <div class="form-group"><label class="form-label">Rating</label><input type="text" class="form-inp"
+              id="asset-rating" placeholder="e.g. 2.5 MW, 220 KV"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Location in Plant</label><input type="text" class="form-inp"
+              id="asset-location" placeholder="e.g. Block B, Row 3"></div>
+          <div class="form-group"><label class="form-label">Naming Convention</label><input type="text" class="form-inp"
+              id="asset-naming" placeholder="e.g. INV-A1, WTG-03"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('asset-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveAsset()">Save Asset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fault Library Modal -->
+  <div class="modal-overlay" id="fault-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title" id="fault-modal-title"><i class="hgi-stroke hgi-alert-01"></i> Add Fault Type</span>
+        <button class="modal-close" onclick="hideModal('fault-modal')"><i class="hgi-stroke hgi-cancel-01"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="fault-edit-id">
+        <div class="form-group"><label class="form-label">Fault Description *</label><input type="text" class="form-inp"
+            id="fault-desc" placeholder="e.g. Busbar joint overheating"></div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Category *</label><select class="form-sel" id="fault-cat">
+              <option>Critical</option>
+              <option>High</option>
+              <option>Medium</option>
+              <option>Low</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">Type *</label><select class="form-sel" id="fault-type">
+              <option>Defect</option>
+              <option>Observation</option>
+              <option>TRAS</option>
+              <option>Curtailment</option>
+              <option>Safety</option>
+              <option>Near Miss</option>
+            </select></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Applicable Equipment</label><select class="form-sel"
+              id="fault-equip">
+              <option value="all">All Equipment</option>
+              <option>Inverter</option>
+              <option>Transformer</option>
+              <option>SCB</option>
+              <option>Breaker</option>
+              <option>Wind Turbine</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">Expected Resolution Time</label><input type="text"
+              class="form-inp" id="fault-resolve" placeholder="e.g. 4 Hours, 2 Days"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Escalation Level</label><select class="form-sel"
+              id="fault-escalation">
+              <option>Testing Head</option>
+              <option>Site Head</option>
+              <option>Zonal Head</option>
+              <option>O&amp;M Head</option>
+            </select></div>
+          <div class="form-group"><label class="form-label">Reading Unit (if required)</label><input type="text"
+              class="form-inp" id="fault-reading-unit" placeholder="e.g. °C, V, A, %, kW"></div>
+        </div>
+        <div style="display:flex;gap:20px;margin-top:8px;">
+          <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;"><input type="checkbox"
+              id="fault-photo-req"> Photo Mandatory</label>
+          <label style="display:flex;align-items:center;gap:8px;font-size:12px;cursor:pointer;"><input type="checkbox"
+              id="fault-reading-req"> Reading Required</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('fault-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveFaultType()">Save Fault Type</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Modal -->
+  <div class="modal-overlay" id="site-modal-m2">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title"><i class="hgi-stroke hgi-location-01"></i> Add / Edit Site</span>
+        <button class="modal-close" onclick="hideModal('site-modal-m2')"><i class="hgi-stroke hgi-cancel-01"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="site-edit-id-m2">
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Site Name *</label><input type="text" class="form-inp"
+              id="sm2-name" placeholder="e.g. Rajasthan Solar Plant"></div>
+          <div class="form-group"><label class="form-label">Zone</label><select class="form-sel" id="sm2-zone">
+              <option>North</option>
+              <option>South</option>
+              <option>East</option>
+              <option>West</option>
+            </select></div>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group"><label class="form-label">DC Capacity (MWp)</label><input type="number"
+              class="form-inp" id="sm2-dc"></div>
+          <div class="form-group"><label class="form-label">AC Capacity (MW)</label><input type="number"
+              class="form-inp" id="sm2-ac"></div>
+          <div class="form-group"><label class="form-label">State</label><input type="text" class="form-inp"
+              id="sm2-state" placeholder="e.g. Rajasthan"></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Site Head Name</label><input type="text" class="form-inp"
+              id="sm2-sh-name"></div>
+          <div class="form-group"><label class="form-label">Site Head Email</label><input type="email" class="form-inp"
+              id="sm2-sh-email"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('site-modal-m2')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveSiteM2()">Save Site</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS DEFER LOAD -->
+  <script src="js/state.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/faults.js"></script>
+  <script src="js/sites.js"></script>
+  <script src="js/adoption.js"></script>
+  <script src="js/defects.js"></script>
+  <script src="js/reports.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="app.js"></script>
+
+</body>
+
+</html>

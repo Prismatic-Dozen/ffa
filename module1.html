@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Central Library, Sites & Field rounds Compliance Suite</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/components.css">
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+</head>
+<body>
+  <!-- AWS Sync Background Spinner Overlay -->
+  <div class="aws-sync-overlay" id="aws-sync-loader">
+    <div class="spinner"></div>
+    <span style="color:#fff; font-weight:700; font-family:'Outfit', sans-serif;">Synchronizing Database with AWS Cloud...</span>
+  </div>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="brand-section">
+        <a class="brand-back" href="index.html"><i class="hgi-stroke hgi-arrow-left-01" style="font-size: 14px; vertical-align: middle;"></i> Module Hub</a>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div class="brand-logo"><i class="hgi-stroke hgi-task-01"></i></div>
+          <div class="brand-name">ComplianceSuite</div>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a class="nav-item active" data-target="overview-page">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            Overview
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="library-page">
+            <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            Central Library
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="frequencies-page">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Frequencies Config
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="escalation-page">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 2 22 22 22"></polygon><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            Escalation Matrix
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="sites-page">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            Sites & Equipment
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="adoption-page">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            Site Adoption
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="runner-page" style="color: var(--secondary); font-weight: 600;">
+            <svg viewBox="0 0 24 24" style="stroke: var(--secondary);"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+            Mobile Field Rounds
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="reports-page">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            Exception Analytics
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-target="admin-page">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            Access Control
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <span style="font-size:12px; color:var(--text-muted);">Theme Mode</span>
+        <button class="theme-toggle-btn" id="theme-toggle">
+          <svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Workspace Content Area -->
+    <main class="main-content">
+      <!-- Header -->
+      <header class="main-header">
+        <div class="header-title-area">
+          <h2 id="header-page-title">Dashboard Overview</h2>
+        </div>
+        <div class="header-stats">
+          <div class="header-stat-item">
+            <span class="header-stat-dot indigo"></span>
+            <span>Master Checklists:</span>
+            <span class="header-stat-val" id="stat-count-checklists">0</span>
+          </div>
+          <div class="header-stat-item">
+            <span class="header-stat-dot cyan"></span>
+            <span>Active Sites:</span>
+            <span class="header-stat-val" id="stat-count-frequencies">0</span>
+          </div>
+          <div class="header-stat-item">
+            <span class="header-stat-dot success"></span>
+            <span>Compliance Tickets:</span>
+            <span class="header-stat-val" id="stat-count-escalations">0</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- TAB 1: OVERVIEW PAGE -->
+      <div id="overview-page" class="page-container active">
+        <div class="glass-card" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(20, 184, 166, 0.12)); margin-bottom: 24px; border-color: rgba(99, 102, 241, 0.2);">
+          <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 8px;">Plant Rounds & Checklists Compliance Suite</h2>
+          <p style="color: var(--text-secondary); max-width: 800px; line-height: 1.6; font-size:13px; margin-bottom: 16px;">
+            Establish digital checklist templates, assign solar/wind site assets, execute round audits via tablets/mobiles in offline mode, raise compliance alarm tickets, and track hierarchical escalation paths.
+          </p>
+          <button class="btn btn-primary" onclick="showCreateMasterModal()">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Create Master Checklist Template
+          </button>
+        </div>
+
+        <div class="stats-bar">
+          <div class="glass-card stat-box">
+            <div class="stat-icon" style="color: var(--primary);"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg></div>
+            <div class="stat-info">
+              <span class="stat-number" id="overview-chk-count">0</span>
+              <span class="stat-label">Master Checklists</span>
+            </div>
+          </div>
+          <div class="glass-card stat-box">
+            <div class="stat-icon" style="color: var(--secondary);"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path></svg></div>
+            <div class="stat-info">
+              <span class="stat-number" id="overview-sites-count">0</span>
+              <span class="stat-label">Configured Sites</span>
+            </div>
+          </div>
+          <div class="glass-card stat-box">
+            <div class="stat-icon" style="color: var(--danger);"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path></svg></div>
+            <div class="stat-info">
+              <span class="stat-number" id="overview-tickets-count">0</span>
+              <span class="stat-label">Unresolved Tickets</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="glass-card">
+            <h3 style="margin-bottom: 16px; font-size:16px;">Compliance Exception Tickets</h3>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Checkpoint / Site</th>
+                    <th>Category</th>
+                    <th>Exception Details</th>
+                    <th>Assigned To</th>
+                    <th>Status</th>
+                    <th>Trend Link</th>
+                  </tr>
+                </thead>
+                <tbody id="tickets-log-container">
+                  <!-- Synced dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="glass-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <h3 style="margin-bottom: 16px; font-size:16px;">Recent Auditing Actions</h3>
+              <div class="comment-feed" id="comments-feed-container">
+                <!-- Log feed comments -->
+              </div>
+            </div>
+            <div style="border-top:1px solid var(--border-color); padding-top:14px; margin-top:14px; display:flex; gap:8px;">
+              <input type="text" class="form-input" id="add-comment-input" placeholder="Post auditing note/comment..." style="font-size:12px; padding:8px 10px;">
+              <button class="btn btn-primary" onclick="postAuditingComment()" style="padding:0 14px;">Post</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: CENTRAL MASTERS LIBRARY -->
+      <div id="library-page" class="page-container">
+        <div class="controls-row">
+          <div class="search-input-wrapper">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" class="search-input" id="checklist-search" placeholder="Search templates by name/category..." oninput="renderMasterChecklistLibrary()">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <select class="filter-select" id="checklist-filter-freq" onchange="renderMasterChecklistLibrary()">
+              <option value="all">All Frequencies</option>
+            </select>
+            <button class="btn btn-primary" onclick="showCreateMasterModal()">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              New Master Checklist
+            </button>
+          </div>
+        </div>
+        <div class="checklist-grid" id="checklists-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- TAB 3: FREQUENCIES CONFIG -->
+      <div id="frequencies-page" class="page-container">
+        <div class="glass-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h3>Occurrence Frequencies Configurator</h3>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Customize standard checklist repeat schedules or register new custom periodicities.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showCreateFreqModal()">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Custom Frequency
+            </button>
+          </div>
+          <div class="frequency-list" id="frequencies-list-container">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: ESCALATION MATRIX -->
+      <div id="escalation-page" class="page-container">
+        <div class="glass-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <div>
+              <h3>Hierarchical Delayed Compliance Escalation</h3>
+              <p style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Adjust roles, delay triggers, and matrix levels for checklists that remain incomplete.</p>
+            </div>
+            <button class="btn btn-primary" onclick="showCreateEscalationModal()">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add Level
+            </button>
+          </div>
+          <div class="escalation-container">
+            <div class="escalation-visualizer" id="escalation-steps-container">
+              <!-- Flow nodes -->
+            </div>
+            <div>
+              <div class="glass-card" style="background-color: rgba(245, 158, 11, 0.03); border-color: rgba(245, 158, 11, 0.2);">
+                <h4 style="color: var(--warning); margin-bottom: 8px;">Auto Alarm Timers</h4>
+                <p style="font-size: 12px; line-height: 1.5; color: var(--text-secondary);">
+                  Checklists left unsubmitted past deadlines countdown and trigger level-wise alerts in linear succession. The notification routes route to configured mobiles/emails.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 5: SITES & KEY EQUIPMENTS -->
+      <div id="sites-page" class="page-container">
+        <div class="controls-row">
+          <h3 style="font-size: 18px;">Configured Operational Sites</h3>
+          <div style="display: flex; gap: 10px;">
+            <!-- AWS Database central fetch button (4.3.g) -->
+            <button class="btn btn-secondary" onclick="triggerAWSDatabaseSync()">
+              <svg viewBox="0 0 24 24"><path d="M21.2 15c.7-1.2 1-2.5.7-3.9-.3-2-1.5-3.8-3.4-4.5-1.2-.4-2.5-.4-3.6 0C14.3 4.2 12 3 9.5 3 5.4 3 2 6.4 2 10.5c0 .5 0 1 .1 1.5C.8 13 0 14.4 0 16c0 2.2 1.8 4 4 4h15c2.2 0 4-1.8 4-4 0-.4-.1-.8-.2-1.2l-1.6.2z"></path></svg>
+              Sync Central AWS Database
+            </button>
+            <button class="btn btn-primary" onclick="showCreateSiteModal()">
+              <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+              Add New Site
+            </button>
+          </div>
+        </div>
+
+        <div class="glass-card">
+          <div class="table-responsive">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>AC / DC Capacity</th>
+                  <th>Location Profile</th>
+                  <th>Site Head Contacts</th>
+                  <th>Assigned Equipments</th>
+                  <th>Center Geo-Coordinates</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="sites-list-container">
+                <!-- Dynamically Rendered -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 6: SITE ADOPTION -->
+      <div id="adoption-page" class="page-container">
+        <div class="glass-card" style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <h3>Checklist Site Adoption Matrix</h3>
+              <p style="font-size:12px; color:var(--text-secondary); margin-top:2px;">Adopt master checklists templates for specific sites. Add overrides for warning thresholds.</p>
+            </div>
+            <div style="display:flex; gap:10px; align-items:center;">
+              <span class="form-label" style="margin-bottom:0;">Select Target Site:</span>
+              <select class="filter-select" id="adopt-site-selector" onchange="renderAdoptionPage()" style="min-width: 220px;"></select>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <div>
+              <h4 style="font-size:14px; margin-bottom:12px; color:var(--secondary);">Adopted Checklists for Selected Site</h4>
+              <div class="table-responsive">
+                <table class="custom-table">
+                  <thead>
+                    <tr>
+                      <th>Adopted Checklist Name</th>
+                      <th>Mapped Asset</th>
+                      <th>Checkpoints</th>
+                      <th>Custom Adjustments</th>
+                    </tr>
+                  </thead>
+                  <tbody id="site-adopted-list">
+                    <!-- Adopted checklists lists -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div>
+              <h4 style="font-size:14px; margin-bottom:12px; color:var(--primary);">Adoptable Master Templates</h4>
+              <div id="available-masters-list">
+                <!-- Masters listed to select -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 7: MOBILE FIELD EXECUTOR SIMULATOR -->
+      <div id="runner-page" class="page-container">
+        <div class="simulator-layout">
+          <!-- Settings and control panel -->
+          <div class="glass-card">
+            <h3>Field Inspector Simulation Controls</h3>
+            <p style="font-size:12px; color:var(--text-secondary); margin-top:4px; margin-bottom:20px;">
+              Simulate plant rounds from tablets/mobiles. Test offline queues, exception warnings, coordinates geofences, and camera captures.
+            </p>
+
+            <div class="form-group">
+              <label class="form-label">1. Choose Simulated Target Site</label>
+              <select class="form-select-styled" id="run-site-select"></select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">2. Select Adopted Asset Checklist</label>
+              <select class="form-select-styled" id="run-checklist-select">
+                <option value="">-- Choose Site First --</option>
+              </select>
+            </div>
+
+            <h4 style="font-size:13px; margin-top:24px; margin-bottom:10px; color:var(--text-secondary);">3. Device Offline Sandbox (4.5.a)</h4>
+            <div class="adoption-box" style="padding:12px;">
+              <div class="toggle-switch-wrapper" style="margin-bottom:0;">
+                <div>
+                  <span class="form-label" style="margin-bottom: 0; font-size:12px;">Simulate Offline Environment</span>
+                  <span class="switch-label-desc">Saves rounds locally; syncs back on reconnect.</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="phone-network-toggle" onchange="toggleOfflineMode(this.checked)">
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+            </div>
+            
+            <h4 style="font-size:13px; margin-top:20px; margin-bottom:6px; color:var(--text-secondary);">Simulated GPS Coordinate Tweak (Geofencing)</h4>
+            <p style="font-size:11px; color:var(--text-muted); line-height:1.4; margin-bottom:12px;">
+              By default, we mock coordinates offset slightly outside 50m to trigger geofence blocks. Set to "True" to mock user standing directly at the asset location.
+            </p>
+            <div class="toggle-switch-wrapper" style="padding: 0 4px;">
+              <span class="form-label" style="font-size:12px; margin-bottom:0;">Force GPS Coordinates Inside Geofence (4.6)</span>
+              <label class="toggle-switch">
+                <input type="checkbox" id="gps-geofence-force" checked onchange="renderMobileForm()">
+                <span class="slider-switch"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Smartphone Device Mock (4.5) -->
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <div class="ffa-title" style="text-align: center; margin-bottom: 12px; font-weight: 700; font-size: 16px; color: var(--secondary); font-family: 'Outfit', sans-serif; letter-spacing: 0.5px; text-transform: uppercase;">FFA (Field Force Application)</div>
+            <div class="phone-emulator">
+              <!-- Home indicator notch at top -->
+              <div class="phone-screen">
+                <div class="phone-status-bar">
+                  <span>09:41 AM</span>
+                  <span id="phone-network-status" style="color:#34d399;">Online / Connected</span>
+                  <div class="phone-status-right">
+                    <svg viewBox="0 0 24 24" style="width:12px; height:12px; fill:currentColor; stroke:none;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.53c-.26-.81-1-1.4-1.9-1.4h-1v-3c0-.55-.45-1-1-1h-6v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path></svg>
+                    <span>100%</span>
+                  </div>
+                </div>
+
+                <div id="mobile-form-container" style="display:flex; flex-direction:column; flex-grow:1;">
+                  <!-- Phone input form fields -->
+                </div>
+              </div>
+              <div class="phone-home-indicator"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 8: EXCEPTION ANALYTICS & REPORTS -->
+      <div id="reports-page" class="page-container">
+        <div class="glass-card" style="margin-bottom: 24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:12px;">
+            <div>
+              <h3>Compliance Exceptions Reporting Dashboard</h3>
+              <span id="report-scope-scope" style="font-size:11px; font-weight:700; color:var(--secondary); background:rgba(20, 184, 166, 0.08); padding: 2px 6px; border-radius:4px;">Visible Scope: Portfolio-level</span>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <!-- PDF export trigger (4.5.l) -->
+              <button class="btn btn-secondary" onclick="triggerPDFExportMock()">
+                <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                Export PDF Logs
+              </button>
+              <!-- Excel export trigger (4.5.m) -->
+              <button class="btn btn-secondary" onclick="triggerExcelExportMock()">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                Export Excel Readings
+              </button>
+              <button class="btn btn-primary" onclick="alert('PDF Exception summary report scheduled successfully. Dispatching to Site Head list daily at 18:00.')" title="Scheduler PDF generation (4.5.k)">
+                Schedule PDF Mailer
+              </button>
+            </div>
+          </div>
+
+          <div class="controls-row">
+            <div class="search-input-wrapper">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" class="search-input" id="reports-search-site" placeholder="Search exceptions by site or zone..." oninput="renderReportsTable()">
+            </div>
+            <div>
+              <select class="filter-select" id="reports-filter-cat" onchange="renderReportsTable()">
+                <option value="all">All Severities</option>
+                <option value="Critical">Critical Only</option>
+                <option value="High">High Only</option>
+                <option value="Medium">Medium Only</option>
+                <option value="Low">Low Only</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-responsive" style="margin-bottom: 24px;">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>Site Asset</th>
+                  <th>Checkpoint Item</th>
+                  <th>Category</th>
+                  <th>Exception Remarks</th>
+                  <th>Status State</th>
+                  <th>Incident Date</th>
+                </tr>
+              </thead>
+              <tbody id="reports-summary-container">
+                <!-- Dynamically populated report rows -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- 15-day parameter trend chart (4.5.n) -->
+        <div class="glass-card" style="margin-bottom:24px;">
+          <div class="trend-canvas-header">
+            <div>
+              <h3 id="trend-title-heading" style="font-size:16px;">15-Day Parameters Trend Analysis</h3>
+              <p style="font-size:11px; color:var(--text-muted); margin-top:2px;">Select a trend button in the exceptions ticket log above to plot dynamic readings history.</p>
+            </div>
+            <div style="font-size:12px; color:var(--text-secondary);">
+              Historical Threshold Breaches: <strong id="trend-breaches-count" style="color:var(--danger)">0</strong> times
+            </div>
+          </div>
+          <div class="trend-canvas-container">
+            <canvas id="trendCanvas" width="700" height="220" style="width:100%; height:100%; display:block;"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 9: ADMIN ACCESS CONTROL PANEL -->
+      <div id="admin-page" class="page-container">
+        <div class="dashboard-grid">
+          <div class="glass-card">
+            <h3>Roles Authorization Matrix</h3>
+            <p style="font-size:12px; color:var(--text-secondary); margin-top:4px; margin-bottom:16px;">
+              Manage checkbox authorization permissions. Checked columns grant specific page actions.
+            </p>
+            <div class="table-responsive">
+              <table class="custom-table">
+                <thead>
+                  <tr>
+                    <th>Role Level Name</th>
+                    <th style="text-align:center;">View Pages</th>
+                    <th style="text-align:center;">Edit Checklists</th>
+                    <th style="text-align:center;">Create Master</th>
+                    <th style="text-align:center;">Delete Templates</th>
+                    <th style="text-align:center;">Adopt Templates</th>
+                    <th style="text-align:center;">Override Rules</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-permissions-tbody">
+                  <!-- Perm checkboxes -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="glass-card">
+            <h3>Simulated User Context Selector</h3>
+            <p style="font-size:12px; color:var(--text-muted); margin-top:4px; margin-bottom:16px;">
+              Switch roles to simulate security restrictions. Field Technician hides configuration tabs; only Chief/Admin sees all pages.
+            </p>
+
+            <!-- Active role indicator -->
+            <div style="background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; display:flex; align-items:center; gap:12px;">
+              <svg viewBox="0 0 24 24" style="width:20px; height:20px; flex-shrink:0; stroke:var(--primary); fill:none; stroke-width:2;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <div>
+                <div style="font-size:11px; color:var(--text-muted); margin-bottom:2px;">Currently Simulating Role</div>
+                <div style="font-size:14px; font-weight:700; color:var(--primary);" id="active-role-display-badge">System Administrator</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Simulation Identity Role Selector</label>
+              <select class="form-select-styled" id="active-role-selector" onchange="updateActiveSimulatedRole(this.value)">
+                <option value="Field Technician">Field Technician / Site Team</option>
+                <option value="Site Head">Site In-Charge / Site Head</option>
+                <option value="Zonal Head">Zonal Head</option>
+                <option value="Chief - O&M">Chief - O&M (Portfolio)</option>
+                <option value="System Administrator">System Administrator</option>
+              </select>
+            </div>
+            <button class="btn btn-secondary" style="width:100%; margin-top:8px; font-size:12px;" onclick="updateActiveSimulatedRole('System Administrator')">
+              ↺ Reset to System Administrator (Full Access)
+            </button>
+
+            <h3 style="margin-top:30px; margin-bottom:8px;">Geofencing Constraints (4.6)</h3>
+            <div class="adoption-box" style="padding:12px;">
+              <div class="toggle-switch-wrapper" style="margin-bottom:0;">
+                <div>
+                  <span class="form-label" style="margin-bottom:0; font-size:12px;">Enforce Equipment Coordinates Geofence</span>
+                  <span class="switch-label-desc">Locks rounds completion unless within 50m of GPS.</span>
+                </div>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="geofence-master-switch" onchange="toggleGeofenceSetting(this.checked)">
+                  <span class="slider-switch"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- CHECKLIST DESIGNER MODAL -->
+  <div class="modal-overlay" id="checklist-modal">
+    <div class="modal-content" style="max-width: 750px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="checklist-modal-title">Create Master Checklist</h3>
+        <button class="close-modal-btn" onclick="hideModal('checklist-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="checklist-edit-id">
+        <div class="form-row">
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" for="checklist-name">Standard Checklist Name</label>
+            <input type="text" class="form-input" id="checklist-name" placeholder="e.g. Cybersecurity Checklist" oninput="updateModalNamingPreview()">
+          </div>
+          <div class="form-group" style="margin-bottom:8px;">
+            <label class="form-label" for="checklist-freq">Usage Frequency</label>
+            <select class="form-select-styled" id="checklist-freq"></select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="checklist-desc">Description</label>
+          <textarea class="form-textarea" id="checklist-desc" placeholder="Details..."></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="checklist-equip-category">Equipment / Area Category</label>
+            <select class="form-select-styled" id="checklist-equip-category">
+              <option value="Inverter">Inverter Control Rooms</option>
+              <option value="Transformer">Transformers</option>
+              <option value="CCTV">CCTV Surveillance</option>
+              <option value="Switchyard">Switchyard Systems</option>
+              <option value="MCR">Main Control Room</option>
+              <option value="SCBs">SCBs</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="checklist-rating-val">Design Make / Rating</label>
+            <input type="text" class="form-input" id="checklist-rating-val" placeholder="e.g. ABB 2.5 MW, 220 KV">
+          </div>
+        </div>
+
+        <!-- Adoption Specific Naming Section -->
+        <div class="adoption-box">
+          <div class="toggle-switch-wrapper">
+            <div>
+              <span class="form-label" style="margin-bottom: 0;">Site-specific equipment/area naming rules (4.1.b)</span>
+              <span class="switch-label-desc">Adapts standard naming dynamically upon site adoption.</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="checklist-adopt" onchange="toggleAdoptionNamingConfig()">
+              <span class="slider-switch"></span>
+            </label>
+          </div>
+
+          <div class="naming-tokens-builder" id="naming-tokens-section" style="display: none;">
+            <span class="form-label" style="font-size: 11px;">Configure Naming Rule (Click Tokens to Add)</span>
+            <div class="token-badges">
+              <span class="token-badge" onclick="appendToken('{{block}}')">[Block Name]</span>
+              <span class="token-badge" onclick="appendToken('{{equipment}}')">[Equipment Type]</span>
+              <span class="token-badge" onclick="appendToken('{{index}}')">[Index]</span>
+              <span class="token-badge" onclick="appendToken('{{site}}')">[Site Prefix]</span>
+              <span class="token-badge" onclick="appendToken('-')">Dash (-)</span>
+              <span class="token-badge" onclick="appendToken('_')">Underscore (_)</span>
+            </div>
+            <div class="form-group" style="margin-bottom: 10px;">
+              <input type="text" class="form-input" id="checklist-naming-rule" placeholder="e.g. {{block}}-{{equipment}}-{{index}}" oninput="updateModalNamingPreview()" style="font-family: monospace; font-size: 13px;">
+            </div>
+            <div class="naming-preview-box">
+              <span>Preview: <strong id="modal-naming-preview-value">Checklist</strong></span>
+              <span class="naming-preview-tag">ADOPTED</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Master Checkpoints Config Container -->
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <label class="form-label" style="margin-bottom:0;">Checkpoints & Reading Points Configuration (4.2)</label>
+            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="addCheckpointConfigRow()">+ Add Checkpoint</button>
+          </div>
+          <div id="modal-checkpoints-container" style="max-height: 250px; overflow-y:auto; padding-right:4px;">
+            <!-- Checkpoints configs -->
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('checklist-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveMasterChecklist()">Save Template</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADOPTION MAPPING CONFIG MODAL -->
+  <div class="modal-overlay" id="adoption-config-modal">
+    <div class="modal-content" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="adoption-modal-title">Adopt Template for Site</h3>
+        <button class="close-modal-btn" onclick="hideModal('adoption-config-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="adopt-site-id">
+        <input type="hidden" id="adopt-master-id">
+
+        <div class="form-group">
+          <label class="form-label" for="adopt-equipment-select">Map Checklist to Specific Equipment Asset</label>
+          <select class="form-select-styled" id="adopt-equipment-select" onchange="updateAdoptionNamingPreview()"></select>
+        </div>
+
+        <div class="adoption-box" style="margin-top:20px;">
+          <h4 style="font-size:12px; margin-bottom:6px;">Adopted Site Naming Result:</h4>
+          <div class="naming-preview-box">
+            <span id="adopt-naming-preview" style="color:var(--text-primary); font-weight:600;">Checklist</span>
+            <span class="naming-preview-tag">RESOLVED</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('adoption-config-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveAdoptionMapping()">Confirm Adoption</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADOPTION OVERRIDES MODAL -->
+  <div class="modal-overlay" id="overrides-modal">
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="override-modal-title">Custom Override Settings</h3>
+        <button class="close-modal-btn" onclick="hideModal('overrides-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="override-site-id">
+        <input type="hidden" id="override-adopted-id">
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+          <p style="font-size:12px; color:var(--text-muted);">Adjust severity limits for this site or append site-added checkpoints.</p>
+          <button class="btn btn-secondary" style="font-size:11px; padding: 4px 8px;" onclick="addSiteSpecificCheckpoint()">+ Add Site checkpoint</button>
+        </div>
+
+        <div id="overrides-checkpoints-list" style="max-height: 320px; overflow-y:auto; padding-right:4px;">
+          <!-- Override checkpoint list -->
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('overrides-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveOverrides()">Save Overrides</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITES PROFILE MODAL -->
+  <div class="modal-overlay" id="site-modal">
+    <div class="modal-content" style="max-width: 780px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="site-modal-title">Create Site Profile</h3>
+        <button class="close-modal-btn" onclick="hideModal('site-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="site-edit-id">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="site-name">Site Name</label>
+            <input type="text" class="form-input" id="site-name" placeholder="e.g. Rajasthan Solar Plant">
+          </div>
+          <div class="form-group" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+            <div>
+              <label class="form-label" for="site-dc">DC Capacity</label>
+              <input type="number" step="any" class="form-input" id="site-dc" placeholder="MWp">
+            </div>
+            <div>
+              <label class="form-label" for="site-ac">AC Capacity</label>
+              <input type="number" step="any" class="form-input" id="site-ac" placeholder="MW">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="form-group">
+            <label class="form-label" for="site-state">State</label>
+            <input type="text" class="form-input" id="site-state" placeholder="e.g. Rajasthan">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-village">Village</label>
+            <input type="text" class="form-input" id="site-village" placeholder="e.g. Bhadla">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-zone">Operations Zone</label>
+            <select class="form-select-styled" id="site-zone">
+              <option value="North">North Zone</option>
+              <option value="South">South Zone</option>
+              <option value="West">West Zone</option>
+              <option value="East">East Zone</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="site-lat">Center Lat Coordinate</label>
+            <input type="number" step="any" class="form-input" id="site-lat" placeholder="e.g. 27.532">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-lng">Center Lng Coordinate</label>
+            <input type="number" step="any" class="form-input" id="site-lng" placeholder="e.g. 71.915">
+          </div>
+        </div>
+
+        <h4 style="font-size:12px; margin-top:20px; margin-bottom:10px; color:var(--primary); font-weight:700;">Site Leadership Contacts (4.3.b)</h4>
+        <div class="form-row" style="grid-template-columns: 1fr 1.2fr 1fr;">
+          <div class="form-group">
+            <label class="form-label" for="site-head-name">Site In-Charge Name</label>
+            <input type="text" class="form-input" id="site-head-name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-head-email">Site Head Email</label>
+            <input type="email" class="form-input" id="site-head-email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-head-mobile">Site Head Mobile</label>
+            <input type="text" class="form-input" id="site-head-mobile" placeholder="Mobile">
+          </div>
+        </div>
+
+        <div class="form-row" style="grid-template-columns: 1fr 1.2fr 1fr; margin-bottom:20px;">
+          <div class="form-group">
+            <label class="form-label" for="site-zonal-name">Zonal Head Name</label>
+            <input type="text" class="form-input" id="site-zonal-name" placeholder="Name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-zonal-email">Zonal Head Email</label>
+            <input type="email" class="form-input" id="site-zonal-email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="site-zonal-mobile">Zonal Head Mobile</label>
+            <input type="text" class="form-input" id="site-zonal-mobile" placeholder="Mobile">
+          </div>
+        </div>
+
+        <!-- Site Sub-team assignment -->
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <label class="form-label" style="margin-bottom:0;">Site Field Team Assignments</label>
+            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="addSiteTeamRow()">+ Add Member</button>
+          </div>
+          <div id="site-team-container" style="max-height:120px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
+            <!-- Team members rows -->
+          </div>
+        </div>
+
+        <!-- Site equipments (Coordinates used for Geofencing checkpoints check 4.6) -->
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <label class="form-label" style="margin-bottom:0;">Key Equipments Coordinate Logs (Geofencing Map)</label>
+            <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 11px;" onclick="addSiteEquipmentRow()">+ Add Equipment</button>
+          </div>
+          <div id="site-equipments-container" style="max-height:140px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;">
+            <!-- Equipment rows -->
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('site-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveSiteProfile()">Save Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FREQUENCY CREATE/EDIT MODAL -->
+  <div class="modal-overlay" id="freq-modal">
+    <div class="modal-content" style="max-width: 440px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="freq-modal-title">Configure Frequency</h3>
+        <button class="close-modal-btn" onclick="hideModal('freq-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="freq-edit-id">
+        <div class="form-group">
+          <label class="form-label" for="freq-name">Frequency Name</label>
+          <input type="text" class="form-input" id="freq-name" placeholder="e.g. Bi-Weekly, Custom 2h">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="freq-desc">Interval Description</label>
+          <input type="text" class="form-input" id="freq-desc" placeholder="e.g. Triggers every 2 weeks on Monday">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="freq-code">Interval Code</label>
+          <input type="text" class="form-input" id="freq-code" placeholder="e.g. bi_weekly, custom_2h" style="font-family: monospace;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('freq-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveFrequency()">Save Frequency</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCALATION CREATE/EDIT MODAL -->
+  <div class="modal-overlay" id="escalation-modal">
+    <div class="modal-content" style="max-width: 450px;">
+      <div class="modal-header">
+        <h3 class="modal-title" id="escalation-modal-title">Configure Escalation Level</h3>
+        <button class="close-modal-btn" onclick="hideModal('escalation-modal')">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="escalation-edit-id">
+        <div class="form-group">
+          <label class="form-label" for="escalation-level-name">Escalation Level Title</label>
+          <input type="text" class="form-input" id="escalation-level-name" placeholder="e.g. Level 1 - Internal Alert">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="escalation-role">Responsible Role</label>
+          <input type="text" class="form-input" id="escalation-role" placeholder="e.g. Testing Head, Site Head">
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="escalation-threshold">Delay Threshold</label>
+            <input type="number" class="form-input" id="escalation-threshold" placeholder="e.g. 12, 24">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="escalation-unit">Time Unit</label>
+            <select class="form-select-styled" id="escalation-unit">
+              <option value="Hours">Hours</option>
+              <option value="Days">Days</option>
+              <option value="Weeks">Weeks</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Alert Channels</label>
+          <div style="display: flex; gap: 20px; margin-top: 8px;">
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+              <input type="checkbox" id="escalation-ch-email" checked> Email
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+              <input type="checkbox" id="escalation-ch-sms"> SMS
+            </label>
+            <label style="display: flex; align-items: center; gap: 8px; font-size: 13px; cursor: pointer;">
+              <input type="checkbox" id="escalation-ch-app" checked> System Push
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('escalation-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveEscalationLevel()">Save Level</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modular Scripts Loading -->
+  <script src="js/state.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/sites.js"></script>
+  <script src="js/adoption.js"></script>
+  <script src="js/runner.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
