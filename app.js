@@ -22,7 +22,7 @@ function initApplicationSuite() {
     updateThemeIcon(newTheme);
   });
 
-  const activeTheme = localStorage.getItem('theme') || 'dark';
+  const activeTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', activeTheme);
   updateThemeIcon(activeTheme);
 

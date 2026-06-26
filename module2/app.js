@@ -73,14 +73,14 @@ function initTheme() {
   const toggleBtn = document.getElementById('theme-toggle');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
       const newTheme = currentTheme === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
       updateThemeIcon(newTheme);
     });
   }
-  const activeTheme = localStorage.getItem('theme') || 'dark';
+  const activeTheme = localStorage.getItem('theme') || 'light';
   document.documentElement.setAttribute('data-theme', activeTheme);
   updateThemeIcon(activeTheme);
 }

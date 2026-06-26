@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 
 <head>
   <meta charset="UTF-8">
@@ -22,6 +22,36 @@
       --txt2: #94a3b8;
       --m: #64748b;
       --glow: rgba(99, 102, 241, .35);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --card: rgba(15, 23, 42, 0.04);
+      --cardh: rgba(15, 23, 42, 0.07);
+      --bdr: rgba(15, 23, 42, 0.08);
+      --txt: #0f172a;
+      --txt2: #475569;
+      --m: #94a3b8;
+      --glow: rgba(99, 102, 241, 0.15);
+    }
+
+    .theme-toggle-btn {
+      background: none;
+      border: 1px solid var(--bdr);
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--txt2);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .theme-toggle-btn:hover {
+      color: var(--txt);
+      border-color: var(--txt);
+      background-color: var(--cardh);
     }
 
     * {
@@ -634,7 +664,7 @@
         </div>
       </div>
       <div class="npills">
-
+        <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme"></button>
       </div>
     </nav>
 
@@ -718,6 +748,30 @@
   </div>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
+      const toggleBtn = document.getElementById('theme-toggle');
+      function updateThemeIcon(theme) {
+        if (!toggleBtn) return;
+        if (theme === 'light') {
+          toggleBtn.innerHTML = `<svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+        } else {
+          toggleBtn.innerHTML = `<svg style="width: 18px; height: 18px;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+        }
+      }
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+          const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('theme', newTheme);
+          updateThemeIcon(newTheme);
+        });
+      }
+
+      const activeTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', activeTheme);
+      updateThemeIcon(activeTheme);
+
       var cards = document.querySelectorAll(".mc");
       cards.forEach(function (c, i) {
         c.style.opacity = "0";
