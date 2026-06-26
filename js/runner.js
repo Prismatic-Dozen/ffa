@@ -504,8 +504,13 @@ function renderReportsTable() {
 
 // 15-day parameter trend rendering engine (4.5.n)
 function viewCheckpointTrend(checkpointId, checkpointText) {
-  // Jump to reports tab
-  switchTab('reports-page');
+  window._isViewingTrend = true;
+  // Jump to reports tab if not already active
+  const reportsTab = document.getElementById('reports-page');
+  if (reportsTab && !reportsTab.classList.contains('active')) {
+    switchTab('reports-page');
+  }
+  window._isViewingTrend = false;
 
   // Render trend chart on Canvas
   const canvas = document.getElementById('trendCanvas');

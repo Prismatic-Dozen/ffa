@@ -71,8 +71,8 @@ function switchTab(pageId) {
     renderMobileForm();
   } else if (pageId === 'reports-page') {
     renderReportsTable();
-    // Pre-plot trend for first ticket if exists
-    if (_appState.tickets.length > 0) {
+    // Pre-plot trend for first ticket if exists and we are not already viewing a specific trend
+    if (!window._isViewingTrend && _appState.tickets.length > 0) {
       viewCheckpointTrend(_appState.tickets[0].checkpointId, _appState.tickets[0].checkpointText);
     }
   } else if (pageId === 'admin-page') {
