@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 8 — Incident Reporting Module</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/module8/style.css">
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand-sec">
+      <a class="brand-back" href="/index.html"><i class="hgi-stroke hgi-arrow-left-01" style="font-size: 14px; vertical-align: middle;"></i> Module Hub</a>
+      <div class="brand-logo"><i class="hgi-stroke hgi-alert-02"></i></div>
+      <div class="brand-title">Incident Reporting</div>
+      <div class="brand-sub">Module 08 &mdash; Real-Time F&amp;S</div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item active" data-page="overview-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        Dashboard
+      </div>
+
+      <div class="nav-group-label">Incidents</div>
+      <div class="nav-item" data-page="incidents-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2" />
+          <line x1="12" y1="8" x2="12" y2="12" />
+          <line x1="12" y1="16" x2="12.01" y2="16" />
+        </svg>
+        Tripping Log
+        <span class="nav-badge" id="active-incident-badge">1</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="role-chip"><i class="hgi-stroke hgi-user" style="font-size: 13px; vertical-align: middle;"></i> Dispatcher</span>
+      <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme"></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <header class="topbar">
+      <h2 class="topbar-title" id="page-title">Dashboard Overview</h2>
+      <div class="topbar-right">
+        <div class="sync-indicator"><span class="sync-dot"></span>AWS Synced</div>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ===== OVERVIEW PAGE ===== -->
+      <div id="overview-page" class="page active">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-ico" style="color: var(--primary);"><i class="hgi-stroke hgi-database"></i></div>
+            <div class="stat-val" id="stat-total">0</div>
+            <div class="stat-lbl">Total Incidents</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#f87171;"><i class="hgi-stroke hgi-flash-off"></i></div>
+            <div class="stat-val" id="stat-active" style="color:#f87171;">0</div>
+            <div class="stat-lbl">Active Trippings</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#fbbf24;"><i class="hgi-stroke hgi-energy"></i></div>
+            <div class="stat-val" id="stat-mw" style="color:#fbbf24;">0</div>
+            <div class="stat-lbl">MW Impacted</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#86efac;"><i class="hgi-stroke hgi-clock-02"></i></div>
+            <div class="stat-val" id="stat-mttr" style="color:#86efac;">2.8 <span style="font-size:12px; font-weight:400; color:var(--muted);">hrs</span></div>
+            <div class="stat-lbl">F&amp;S Notification Time</div>
+          </div>
+        </div>
+
+        <div class="simulator-layout">
+          
+          <!-- Integration Status Box -->
+          <div>
+            <!-- F&S and CREAMS Realtime Notifications -->
+            <div class="glass glass-p" style="margin-bottom:24px;">
+              <h3 style="font-size:15px; margin-bottom:6px;"><i class="hgi-stroke hgi-direction-left"></i> CREAMS &amp; F&amp;S Integration Live Stream</h3>
+              <p style="font-size:11px; color:var(--muted); margin-bottom:16px;">Real-time push status indicating telemetry sent directly to Forecasting &amp; Scheduling (F&amp;S) and CREAMS Cloud Systems.</p>
+              
+              <div id="integration-log-stream" style="display:flex; flex-direction:column; gap:10px; max-height:430px; overflow-y:auto; padding-right:4px;">
+                <!-- Realtime integrations log stream -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Smartphone Emulator Panel -->
+          <div>
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <div style="font-family:Outfit,sans-serif; text-transform:uppercase; font-size:11px; font-weight:800; color:var(--primary); letter-spacing:1px; margin-bottom:8px;">
+                <i class="hgi-stroke hgi-smart-phone-01"></i> Field Operator Incident App
+              </div>
+              <div class="phone-emulator">
+                <div class="phone-screen">
+                  <div class="phone-status-bar">
+                    <span>10:42 AM</span>
+                    <span style="color:#34d399; font-weight:700;"><i class="hgi-stroke hgi-signal-01"></i> Connected</span>
+                    <div class="phone-status-right">
+                      <i class="hgi-stroke hgi-wifi-01"></i>
+                      <span>100%</span>
+                    </div>
+                  </div>
+
+                  <div id="mobile-flow-container" style="display:flex; flex-direction:column; flex-grow:1;">
+                    <!-- Dynamically Rendered Emulator Screen -->
+                  </div>
+                </div>
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== INCIDENTS PAGE ===== -->
+      <div id="incidents-page" class="page">
+        <div class="controls glass glass-p" style="margin-bottom:20px; border-radius:14px;">
+          <div style="display:flex; gap:16px; flex:1; flex-wrap:wrap;">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" class="search-inp" id="incidents-search" placeholder="Search incidents by equipment or site..." oninput="renderIncidentsTable()">
+            </div>
+            <select class="filter-sel" id="incidents-filter-status" onchange="renderIncidentsTable()">
+              <option value="all">All Statuses</option>
+              <option value="Active">Active</option>
+              <option value="Resolved">Resolved</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Desktop Incident Table -->
+        <div class="glass">
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Site Name</th>
+                  <th>Equipment Type</th>
+                  <th>Equipment Name</th>
+                  <th>MW Impact</th>
+                  <th>Start Time</th>
+                  <th>Expected Downtime</th>
+                  <th>Restoration Time</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="incidents-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Update Modal -->
+  <div class="modal-overlay" id="update-restoration-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <span class="modal-title"><i class="hgi-stroke hgi-location-01"></i> Update Restoration Time</span>
+        <button class="modal-close" onclick="hideModal('update-restoration-modal')"><i class="hgi-stroke hgi-cancel-01"></i></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="edit-incident-id">
+        <div class="form-group">
+          <label class="form-label">Incident Start Time</label>
+          <input type="text" class="form-inp" id="edit-start-time" readonly>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">New Expected Downtime (HH:MM) *</label>
+            <input type="text" class="form-inp" id="edit-downtime" placeholder="e.g. 02:30" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Status *</label>
+            <select class="form-sel" id="edit-status" onchange="toggleEditActualTime()">
+              <option value="Active">Active</option>
+              <option value="Resolved">Resolved &amp; Restore</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" id="edit-actual-group" style="display:none;">
+          <label class="form-label">Actual Restoration Time (Local) *</label>
+          <input type="datetime-local" class="form-inp" id="edit-actual-time">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Remarks / Updates *</label>
+          <textarea class="form-textarea" id="edit-remarks" required></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" onclick="hideModal('update-restoration-modal')">Cancel</button>
+        <button class="btn btn-primary" onclick="saveIncidentUpdate()">Update &amp; Broadcast</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="/module8/js/state.js"></script>
+  <script src="/module8/app.js"></script>
+
+</body>
+
+</html>

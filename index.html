@@ -360,6 +360,11 @@
       --g: rgba(20, 184, 166, .22);
     }
 
+    .mc.m8 {
+      --c: #ec4899;
+      --g: rgba(236, 72, 153, .22);
+    }
+
     .mc:not(.nohov):hover {
       background: var(--cardh);
       border-color: var(--c);
@@ -619,8 +624,9 @@
 
     <nav class="nav">
       <div class="brand">
-        <div class="bico" style="background: #fff; padding: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--bdr);">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/e/ea/Tata_Power_Logo.svg" alt="Tata Power Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+        <div class="bico"
+          style="background: #4e77ff; padding: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid var(--bdr);">
+          <img src="tp-logo.svg" alt="Tata Power Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;">
         </div>
         <div>
           <div class="bname">Field Force App</div>
@@ -690,22 +696,22 @@
         </div>
 
         <!-- MODULE 7 -->
-        <div class="mc m7 nohov">
+        <a href="module7/index.html" class="mc m7">
           <div>
             <div class="mno">Module 7</div>
             <h3 class="mtit">Work Allocation Management Module</h3>
           </div>
-          <button class="mbtn dim">Planned</button>
-        </div>
+          <button class="mbtn">Open Module <i class="hgi-stroke hgi-arrow-right-01"></i></button>
+        </a>
 
         <!-- MODULE 8 -->
-        <div class="mc m7 nohov">
+        <a href="module8/index.html" class="mc m8">
           <div>
             <div class="mno">Module 8</div>
             <h3 class="mtit">Incident Reporting Module</h3>
           </div>
-          <button class="mbtn dim">Planned</button>
-        </div>
+          <button class="mbtn">Open Module <i class="hgi-stroke hgi-arrow-right-01"></i></button>
+        </a>
 
       </div>
     </section>

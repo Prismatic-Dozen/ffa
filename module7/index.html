@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 7 — Work Allocation Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/module7/style.css">
+  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+</head>
+
+<body>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand-sec">
+      <a class="brand-back" href="/index.html"><i class="hgi-stroke hgi-arrow-left-01" style="font-size: 14px; vertical-align: middle;"></i> Module Hub</a>
+      <div class="brand-logo"><i class="hgi-stroke hgi-task-01"></i></div>
+      <div class="brand-title">Work Allocation</div>
+      <div class="brand-sub">Module 07 &mdash; Field Operations</div>
+    </div>
+
+    <nav class="nav-links">
+      <div class="nav-group-label">Overview</div>
+      <div class="nav-item active" data-page="overview-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7" />
+          <rect x="14" y="3" width="7" height="7" />
+          <rect x="14" y="14" width="7" height="7" />
+          <rect x="3" y="14" width="7" height="7" />
+        </svg>
+        Dashboard
+      </div>
+
+      <div class="nav-group-label">Task Registry</div>
+      <div class="nav-item" data-page="tasks-page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="16" y1="13" x2="8" y2="13" />
+          <line x1="16" y1="17" x2="8" y2="17" />
+          <polyline points="10 9 9 9 8 9" />
+        </svg>
+        All Allocations
+        <span class="nav-badge" id="open-tasks-badge">2</span>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="role-chip"><i class="hgi-stroke hgi-user" style="font-size: 13px; vertical-align: middle;"></i> Supervisor</span>
+      <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme"></button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main-area">
+    <header class="topbar">
+      <h2 class="topbar-title" id="page-title">Dashboard Overview</h2>
+      <div class="topbar-right">
+        <div class="sync-indicator"><span class="sync-dot"></span>AWS Synced</div>
+      </div>
+    </header>
+
+    <div class="content-area">
+
+      <!-- ===== OVERVIEW PAGE ===== -->
+      <div id="overview-page" class="page active">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-ico" style="color: var(--primary);"><i class="hgi-stroke hgi-task-02"></i></div>
+            <div class="stat-val" id="stat-total">0</div>
+            <div class="stat-lbl">Total Tasks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#f87171;"><i class="hgi-stroke hgi-clock-01"></i></div>
+            <div class="stat-val" id="stat-pending" style="color:#f87171;">0</div>
+            <div class="stat-lbl">Pending Tasks</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#86efac;"><i class="hgi-stroke hgi-checkmark-circle-02"></i></div>
+            <div class="stat-val" id="stat-completed" style="color:#86efac;">0</div>
+            <div class="stat-lbl">Completed</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-ico" style="color:#fca5a5;"><i class="hgi-stroke hgi-alert-01"></i></div>
+            <div class="stat-val" id="stat-overdue" style="color:#fca5a5;">0</div>
+            <div class="stat-lbl">Backlog &gt; 3 Days</div>
+          </div>
+        </div>
+
+        <div class="simulator-layout">
+          
+          <!-- Desk Allocation Panel -->
+          <div>
+            <!-- Form Card -->
+            <div class="glass glass-p" style="margin-bottom:24px;">
+              <h3 style="font-size:15px; margin-bottom:14px;"><i class="hgi-stroke hgi-plus-sign-circle"></i> Create &amp; Allocate Activity</h3>
+              <form id="assign-task-form" onsubmit="handleAssignTask(event)">
+                <div class="form-group">
+                  <label class="form-label">Activity / Task Description *</label>
+                  <input type="text" class="form-inp" id="task-title" placeholder="e.g. Inspect Switchyard lightning arrestors" required>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Target Asset / Equipment *</label>
+                    <select class="form-sel" id="task-asset" required></select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Priority Category *</label>
+                    <select class="form-sel" id="task-priority" required>
+                      <option>Critical</option>
+                      <option selected>High</option>
+                      <option>Medium</option>
+                      <option>Low</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label class="form-label">Estimated Effort (Hours) *</label>
+                    <input type="number" class="form-inp" id="task-est-hours" min="1" max="100" value="4" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Target Due Date *</label>
+                    <input type="date" class="form-inp" id="task-due-date" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Assign To Site Technician *</label>
+                  <select class="form-sel" id="task-assignee" onchange="updateAssigneeLoadPreview()" required></select>
+                  <div style="font-size: 11px; color: var(--text2); margin-top: 5px;" id="assignee-load-preview">
+                    Technician current loading: <strong>0 Hours</strong> (Capacity: 8 Hours/Day)
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">
+                  <i class="hgi-stroke hgi-user-add-01"></i> Allocate Task &amp; Notify Field Force
+                </button>
+              </form>
+            </div>
+
+            <!-- Team Workload Panel -->
+            <div class="glass glass-p">
+              <h3 style="font-size:15px; margin-bottom:4px;"><i class="hgi-stroke hgi-user-group"></i> Site Team Workload Distribution</h3>
+              <p style="font-size:11px; color:var(--muted); margin-bottom:16px;">Direct hours backlog compared against daily 8-hour shift base capacity.</p>
+              <div id="team-load-container" style="display:flex; flex-direction:column; gap:12px;">
+                <!-- Dynamically Rendered Load Bars -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Smartphone Emulator Panel -->
+          <div>
+            <div style="display:flex; flex-direction:column; align-items:center;">
+              <div style="font-family:Outfit,sans-serif; text-transform:uppercase; font-size:11px; font-weight:800; color:var(--primary); letter-spacing:1px; margin-bottom:8px;">
+                <i class="hgi-stroke hgi-smart-phone-01"></i> Technician Mobileround Simulation
+              </div>
+              <div class="phone-emulator">
+                <div class="phone-screen">
+                  <div class="phone-status-bar">
+                    <span>10:42 AM</span>
+                    <span style="color:#34d399; font-weight:700;"><i class="hgi-stroke hgi-signal-01"></i> Connected</span>
+                    <div class="phone-status-right">
+                      <i class="hgi-stroke hgi-wifi-01"></i>
+                      <span>100%</span>
+                    </div>
+                  </div>
+
+                  <div id="mobile-flow-container" style="display:flex; flex-direction:column; flex-grow:1;">
+                    <!-- Dynamically Rendered Emulator Screen -->
+                  </div>
+                </div>
+                <div class="phone-home-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ===== TASK LIST PAGE ===== -->
+      <div id="tasks-page" class="page">
+        <div class="controls glass glass-p" style="margin-bottom:20px; border-radius:14px;">
+          <div style="display:flex; gap:16px; flex:1; flex-wrap:wrap;">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+              <input type="text" class="search-inp" id="tasks-search" placeholder="Search tasks description or source..." oninput="renderTasksTable()">
+            </div>
+            <select class="filter-sel" id="tasks-filter-status" onchange="renderTasksTable()">
+              <option value="all">All Statuses</option>
+              <option value="Open">Open</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Closed">Closed</option>
+            </select>
+            <select class="filter-sel" id="tasks-filter-user" onchange="renderTasksTable()">
+              <option value="all">All Assignees</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Desktop Task Table -->
+        <div class="glass">
+          <div class="tbl-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Task Details</th>
+                  <th>Asset</th>
+                  <th>Source Module</th>
+                  <th>Priority</th>
+                  <th>Assignee</th>
+                  <th>Effort</th>
+                  <th>Due Date</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="tasks-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="/module7/js/state.js"></script>
+  <script src="/module7/app.js"></script>
+
+</body>
+
+</html>
